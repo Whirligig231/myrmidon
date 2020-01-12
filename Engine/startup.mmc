@@ -1,0 +1,8 @@
+# Startup program, displays a splash screen then loads the real program
+clearp 0 0
+setp 1 -1 0
+dbg
+refresh
+delay 1000
+clear 0
+rex 1

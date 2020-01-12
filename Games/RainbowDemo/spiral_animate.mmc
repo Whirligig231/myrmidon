@@ -1,0 +1,74 @@
+# Animate a rotating spiral that speeds up and slows down over time
+
+# a : rotation offset, as 1/100 of a color (so 0-5999)
+# b : current rotation offset, as one color (0-59)
+# c : rotation speed in 1/100 colors per frame (over 2, we add it twice)
+# d : utility variable for constants
+# e : whether to increase (1) or decrease (-1) speed
+# f : utility variable for tests
+# g : rotation offset as one color
+# h : stores color 0 from the palette (to set as color 59 later)
+# i : loop counter for the palette
+# j : i + 1
+# k : stores current color from the palette
+
+= a 0
+= b 0
+= c 0
+= e 1
+
+readb 0
+readp 0
+
+while 1
+	# Increase speed by acceleration
+	+ c c e
+	# If speed is 100, set acceleration to -1; if speed is 0, set acceleration to 1
+	= d 100
+	== f c d
+	if f
+		= e -1
+	end
+	== f c 0
+	if f
+		= e 1
+	end
+	# Add c to a and put a in range 0-5999
+	+ a a c
+	+ a a c
+	= d 6000
+	% a a d
+	# Compute "real" offset in colors
+	= d 100
+	/ g a d
+	# While current offset != target offset:
+	!= f b g
+	while f
+		# Rotate palette!
+		getp 0 h 0
+		# For i from 0 to 58
+		= d 59
+		= i 0
+		< f i d
+		while f
+			# Set palette[i] to palette[i+1]
+			+ j i 1
+			getp j k 0
+			setp i k 0
+			+ i i 1
+			< f i d
+		end
+		# Set palette[59] to palette[0]
+		setp d h 0
+		# Increment current offset and check again
+		+ b b 1
+		= d 60
+		% b b d
+		!= f b g
+	end
+	
+	# Draw to the screen!
+	dbg
+	refresh
+	frame
+end

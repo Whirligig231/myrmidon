@@ -1,0 +1,8 @@
+# Draw background 0 with palette 0
+
+readb 0
+readp 0
+dbg
+refresh
+while 1
+end

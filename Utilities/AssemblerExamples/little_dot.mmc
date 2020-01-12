@@ -1,0 +1,50 @@
+# A little dot you can move around!
+
+= x 48
+= y 32
+
+while 1
+	button u 0
+	button d 1
+	button l 2
+	button r 3
+	
+	if u
+		- y y 1
+	end
+	if d
+		+ y y 1
+	end
+	if l
+		- x x 1
+	end
+	if r
+		+ x x 1
+	end
+	
+	= c 96
+	s<= f c x
+	if f
+		= x 0
+	end
+	s< f x 0
+	if f
+		= x 95
+	end
+	
+	= c 64
+	s<= f c y
+	if f
+		= y 0
+	end
+	s< f y 0
+	if f
+		= y 63
+	end
+	
+	clear 0
+	conc p x y
+	dpx p -1
+	refresh
+	frame
+end

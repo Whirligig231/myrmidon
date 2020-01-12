@@ -1,0 +1,414 @@
+# FLAPPYBALL, the internet sensation everyone craves
+
+# a : Ball coordinates
+# b : Background coordinates
+# c, d : Temporary registers for constants
+# e : Current score
+# f, g : Temporary registers for conditions
+# h : High score (saves to 0x1000 when you die)
+# i : Temporary register for indices
+# m : Mode: 0 = menu, 1 = playing, 2 = dead
+# n : Frame counter
+# p, q, r: Y-coordinate of each of the three pipes on screen (LTR), -1 to disable
+# (coordinate is the bottom of the gap!)
+# s : Ball subpixel position (256 = pixel)
+# t : x offset of the left edge of the p pipe from the left edge
+# v : Ball velocity in subpixels per frame
+# w,x,y : Temporary registers for coordinates
+# z : Ball animation coordinates (sprite index)
+
+# 0x0080-0x0083: Current score string
+# 0x0090-0x0095: High score string (number starts at 0x0092)
+# 0x00a0-0x00a4: "Press UP"
+
+# Read the background
+readb 0
+
+# Read the spritesheets
+reads 0 0 # Game spritesheet
+reads 1 1 # Font
+
+# Read the palette
+readp 0
+
+# Load the high score
+load h 0x1000
+
+# Set up initial variables
+= a (44,28)
+= t 96
+= p -1
+= q -1
+= r -1
+
+# Main loop
+while 1
+	# Clear the screen (to reset flags)
+	clear 0
+	
+	# Draw the background
+	setpoffs 0
+	dbg b
+	
+	# Pipe coordinate management
+	== f m 1
+	if f
+		- t t 1
+	end
+	= c -16
+	s<= f t c
+	if f
+		s<= f 0 q
+		if f
+			+ e e 1
+			< f h e
+			if f
+				= h e
+			end
+		end
+		= c 40
+		+ t t c
+		= p q
+		= q r
+		random r 24
+		= c 32
+		+ r r c
+	end
+	
+	# Draw pipes
+	setpoffs 16
+	
+	s<= f 0 p
+	if f
+		conc x t p
+		= y (0,16)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= i p
+		= c 8
+		+ i i c
+		= c 64
+		s< f i c
+		while f
+			conc x t i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c 8
+			+ i i c
+			= c 64
+			s< f i c
+		end
+		
+		= i p
+		= c 32
+		- i i c
+		conc x t i
+		= y (0,32)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= c -8
+		+ i i c
+		s<= f c i
+		while f
+			conc x t i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c -8
+			+ i i c
+			s<= f c i
+		end
+	end
+	
+	= c 40
+	+ d t c
+	s<= f 0 q
+	if f
+		conc x d q
+		= y (0,16)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= i q
+		= c 8
+		+ i i c
+		= c 64
+		s< f i c
+		while f
+			conc x d i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c 8
+			+ i i c
+			= c 64
+			s< f i c
+		end
+		
+		= i q
+		= c 32
+		- i i c
+		conc x d i
+		= y (0,32)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= c -8
+		+ i i c
+		s<= f c i
+		while f
+			conc x d i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c -8
+			+ i i c
+			s<= f c i
+		end
+	end
+	
+	= c 80
+	+ d t c
+	s<= f 0 r
+	if f
+		conc x d r
+		= y (0,16)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= i r
+		= c 8
+		+ i i c
+		= c 64
+		s< f i c
+		while f
+			conc x d i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c 8
+			+ i i c
+			= c 64
+			s< f i c
+		end
+		
+		= i r
+		= c 32
+		- i i c
+		conc x d i
+		= y (0,32)
+		dss8 y x
+		= c (8,0)
+		+ y y c
+		+ x x c
+		dss8 y x
+		
+		= c -8
+		+ i i c
+		s<= f c i
+		while f
+			conc x d i
+			= y (0,24)
+			dss8 y x
+			= c (8,0)
+			+ y y c
+			+ x x c
+			dss8 y x
+			
+			= c -8
+			+ i i c
+			s<= f c i
+		end
+	end
+	
+	# Detect up press
+	buttonp f 0
+	if f
+		== f m 1
+		if f
+			= v -400
+		end
+		== f m 0
+		if f
+			= v -400
+			= m 1
+		end
+		< f 1 m
+		if f
+			= e 0
+			= a (44,28)
+			= t 96
+			= p -1
+			= q -1
+			= r -1
+			= m 0
+		end
+	end
+	
+	# Adjust ball velocity
+	= c 30
+	+ v v c
+	+ s s v
+	= c 256
+	s<= f c s
+	while f
+		- s s c
+		+ a a 1
+		s<= f c s
+	end
+	s< f s 0
+	while f
+		+ s s c
+		- a a 1
+		s< f s 0
+	end
+	= c 128
+	conc d 0 a
+	<= f c d
+	if f
+		= d 44
+		conc a d 0
+		= s 0
+		- v 0 v
+	end
+	= c 56
+	conc d 0 a
+	s< f c d
+	if f
+		= d 44
+		conc a d c
+		= s 0
+		- v 0 v
+		= c 2
+		== f m c
+		if f
+			= v 0
+		end
+	end
+	
+	# Draw the ball
+	setpoffs 8
+	dss8 z a
+	
+	# Check for collision
+	colflags 3
+	col8 f a
+	== g m 1
+	&& f f g
+	if f
+		= m 2
+		# Save high score
+		store h 0x1000
+		= c 2
+		write c 0x1000
+	end
+	
+	# Set up graphics variables for the next frame
+	= c 2
+	!= f m c
+	if f
+		+ n n 1
+		& f n 1
+		if f
+			= c (1,0)
+			+ b b c
+		end
+		= c (96,0)
+		% b b c
+		= c (8,0)
+		+ z z c
+		= c (64,0)
+		% z z c
+	end
+	
+	# Draw the score
+	setpoffs 24
+	!= f m 0
+	if f
+		= c 0x0080
+		itoa e c
+		dstr 1 0 c
+	end
+	= c 0x0092
+	itoa h c
+	= c 0x0090
+	strw x c
+	= c 96
+	- x c x
+	conc x x 0
+	= c 0x0090
+	dstr 1 x c
+	
+	# Draw the menu
+	== f m 0
+	if f
+		setpoffs 32
+		= x 16
+		= y 8
+		= c 40
+		< f y c
+		while f
+			conc w x y
+			dss16 w w
+			
+			= c 16
+			+ x x c
+			= c 80
+			<= f c x
+			if f
+				= c 16
+				+ y y c
+				= x 16
+			end
+			= c 40
+			< f y c
+		end
+		setpoffs 24
+		= x (24,56)
+		= c 0x00a0
+		dstr 1 x c
+	end
+	
+	# Refresh the screen and wait for the next frame (40 FPS)
+	refresh
+	= c 25
+	frame c
+end
