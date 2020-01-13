@@ -4,10 +4,10 @@
 
 Myrmidon is a handheld gaming system built on the ESP8266 SOC. The current version is based on the NodeMCU board to make it easy to prototype. The goal of the project is to create an architecture that enables the system to load games off of SD cards and play them using an 8-button controller and a 96x64, 16-bit OLED display. A DIY system like this offers several advantages over a traditional handheld gaming device:
 
-- *Cost:* The total hardware cost for a Myrmidon system is around 50 USD. Even a refurbished mainstream handheld from a few generations back will cost 60 USD or more.
-- *Accessibility:* Myrmidon's software is open source, and its hardware is readily available with no "special sauce" or proprietary components. Even the game cartridges are simply standard SD cards. This means that you don't need any special license or expertise to develop for it; all you need is documentation and coding skill. In addition, if you have any special needs or ideas, it is easy to modify the circuitry yourself.
-- *Sustainability:* Related to the above, Myrmidon's open nature means that people can never stop developing for the system and iterating on its design. If in the future some component becomes outdated and needs to be replaced or emulated, there won't be any reverse engineering, just engineering.
-- *Fun:* Of course, the reason I made Myrmidon is none of these. It's simply that I, like many, am a hobby electronics enthusiast who thought it would be a fun challenge. Perhaps building a Myrmidon could be your next project!
+- **Cost:** The total hardware cost for a Myrmidon system is around 50 USD. Even a refurbished mainstream handheld from a few generations back will cost 60 USD or more.
+- **Accessibility:** Myrmidon's software is open source, and its hardware is readily available with no "special sauce" or proprietary components. Even the game cartridges are simply standard SD cards. This means that you don't need any special license or expertise to develop for it; all you need is documentation and coding skill. In addition, if you have any special needs or ideas, it is easy to modify the circuitry yourself.
+- **Sustainability:** Related to the above, Myrmidon's open nature means that people can never stop developing for the system and iterating on its design. If in the future some component becomes outdated and needs to be replaced or emulated, there won't be any reverse engineering, just engineering.
+- **Fun:** Of course, the reason I made Myrmidon is none of these. It's simply that I, like many, am a hobby electronics enthusiast who thought it would be a fun challenge. Perhaps building a Myrmidon could be your next project!
 
 ## Getting Started
 
