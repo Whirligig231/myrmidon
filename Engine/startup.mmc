@@ -1,8 +1,17 @@
 # Startup program, displays a splash screen then loads the real program
+loadsnd 0x1800
+playsnd 0 0
 clearp 0 0
 setp 1 -1 0
 dbg
 refresh
-delay 1000
+delay 907
 clear 0
+refresh
+delay 400
+= c 3
+read c 0x1800
+= c 2
+read c 0x1000
+read 0 0
 rex 1

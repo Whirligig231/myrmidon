@@ -607,6 +607,25 @@ for line in lines:
         instruction[0] = 0xa5
         instruction[1] = val1['RegisterValue']
         instruction[2] = val2['RegisterValue']
+    elif opcode == 'loadsnd':
+        if val2['RegisterValue'] is not None:
+            instruction[0] = 0xb0
+            instruction[2] = val1['RegisterValue']
+        else:
+            instruction[0] = 0xb1
+            set23(instruction, val1['ImmediateValue'])
+    elif opcode == 'playsnd':
+        if val2['RegisterValue'] is not None:
+            instruction[0] = 0xb2
+            instruction[1] = val1['RegisterValue']
+            instruction[2] = val2['RegisterValue']
+        else:
+            instruction[0] = 0xb3
+            instruction[1] = val1['RegisterValue']
+            set23(instruction, val2['ImmediateValue'])
+    elif opcode == 'stopsnd':
+        instruction[0] = 0xb4
+        instruction[1] = val1['RegisterValue']
     elif opcode == 'random':
         if val2['RegisterValue'] is not None:
             instruction[0] = 0xf0

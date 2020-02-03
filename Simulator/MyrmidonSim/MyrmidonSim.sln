@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29613.14
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyrmidonSim", "MyrmidonSim\MyrmidonSim.vcxproj", "{893EF6BD-4358-4C2F-BE49-06FA5F8B723F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AudioTest", "AudioTest\AudioTest.vcxproj", "{EDF29639-43B3-4339-9921-161A6A28C382}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AY38910DLL", "AY38910DLL\AY38910DLL.vcxproj", "{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,22 @@ Global
 		{893EF6BD-4358-4C2F-BE49-06FA5F8B723F}.Release|x64.Build.0 = Release|x64
 		{893EF6BD-4358-4C2F-BE49-06FA5F8B723F}.Release|x86.ActiveCfg = Release|Win32
 		{893EF6BD-4358-4C2F-BE49-06FA5F8B723F}.Release|x86.Build.0 = Release|Win32
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Debug|x64.ActiveCfg = Debug|x64
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Debug|x64.Build.0 = Debug|x64
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Debug|x86.ActiveCfg = Debug|Win32
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Debug|x86.Build.0 = Debug|Win32
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Release|x64.ActiveCfg = Release|x64
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Release|x64.Build.0 = Release|x64
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Release|x86.ActiveCfg = Release|Win32
+		{EDF29639-43B3-4339-9921-161A6A28C382}.Release|x86.Build.0 = Release|Win32
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Debug|x64.ActiveCfg = Debug|x64
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Debug|x64.Build.0 = Debug|x64
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Debug|x86.ActiveCfg = Debug|Win32
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Debug|x86.Build.0 = Debug|Win32
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Release|x64.ActiveCfg = Release|x64
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Release|x64.Build.0 = Release|x64
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Release|x86.ActiveCfg = Release|Win32
+		{63092C4C-8368-4C15-BBE1-74B6C04EC4BD}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,7 @@
 # Myrmidon
 
+**Note: a lot has changed in the most recent commit / update. Please stand by, and the documentation will be updated shortly.**
+
 ## Introduction
 
 Myrmidon is a handheld gaming system built on the ESP8266 SOC. The current version is based on the NodeMCU board to make it easy to prototype. The goal of the project is to create an architecture that enables the system to load games off of SD cards and play them using an 8-button controller and a 96x64, 16-bit OLED display. A DIY system like this offers several advantages over a traditional handheld gaming device:
